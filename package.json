@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/VladimirChudovskiy/jadle/issues"
   },
-  "homepage": "https://github.com/VladimirChudovskiy/jadle#readme"
+  "homepage": "https://github.com/VladimirChudovskiy/jadle#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1"
+  }
 }
