@@ -1,0 +1,19 @@
+{
+  "name": "jadle",
+  "version": "1.0.0",
+  "description": "JSON task handler",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladimirChudovskiy/jadle.git"
+  },
+  "author": "Volodymyr Chudovskyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VladimirChudovskiy/jadle/issues"
+  },
+  "homepage": "https://github.com/VladimirChudovskiy/jadle#readme"
+}
