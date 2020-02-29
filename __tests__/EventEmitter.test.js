@@ -51,5 +51,17 @@ test('remove listener', () => {
   expect(a).toEqual(2);
 });
 
+test('pass param into event emitter', () => {
+  const ee = new EventEmitter();
+
+  let a = 1;
+  ee.on('event4', (data) => {
+    a = data;
+  });
+
+  expect(a).toBe(1);
+  ee.emit('event4', 5);
+  expect(a).toBe(5);
+});
 
 
