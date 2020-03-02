@@ -5,7 +5,7 @@ test('check Model is singltone', () => {
   const model = new Model();
   const model2 = new Model();
 
-  expect(model === model2).toBeTruthy();
+  expect(model === model2).not.toBeTruthy();
 });
 
 test('check set and get model', () => {

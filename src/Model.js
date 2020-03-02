@@ -1,23 +1,16 @@
-let instance = null;
-const data = {};
-const events = {};
-
 const UPDATE_EVENT_NAME = 'modelUpdated';
 
 class Model {
   constructor() {
-    if (instance === null) {
-      instance = this;
-    }
-
-    return instance;
+    this.data = {};
+    this.events = {};
   }
 
   set(name, value) {
-    const prevValue = data[name];
-    data[name] = value;
-    if (UPDATE_EVENT_NAME in events) {
-      events.modelUpdated(UPDATE_EVENT_NAME, {
+    const prevValue = this.data[name];
+    this.data[name] = value;
+    if (UPDATE_EVENT_NAME in this.events) {
+      this.events.modelUpdated(UPDATE_EVENT_NAME, {
         prop: name,
         prev: prevValue,
         current: value,
@@ -26,17 +19,16 @@ class Model {
   }
 
   get(name) {
-    return data[name];
+    return this.data[name];
   }
 
   addListener(name, listener) {
-    events[name] = listener;
+    this.events[name] = listener;
   }
 
   removeListener(name) {
-    delete events[name];
+    delete this.events[name];
   }
 }
-
 
 export default Model;
