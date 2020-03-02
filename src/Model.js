@@ -2,6 +2,8 @@ let instance = null;
 const data = {};
 const events = {};
 
+const UPDATE_EVENT_NAME = 'modelUpdated';
+
 class Model {
   constructor() {
     if (instance === null) {
@@ -14,8 +16,8 @@ class Model {
   set(name, value) {
     const prevValue = data[name];
     data[name] = value;
-    if ('modelUpdated' in events) {
-      events.modelUpdated('modelUpdated', {
+    if (UPDATE_EVENT_NAME in events) {
+      events.modelUpdated(UPDATE_EVENT_NAME, {
         prop: name,
         prev: prevValue,
         current: value,
