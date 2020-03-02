@@ -1,3 +1,5 @@
+import { parse } from './TaskParser';
+
 let instance = null;
 const tasks = [];
 
@@ -15,14 +17,23 @@ class TaskManager {
   }
 
   add(task) {
-    tasks.push(task);
+    tasks.push(parse(task));
   }
 
-  // addMultiple(tasks) {}
+  addMultiple(items) {
+    items.forEach((task) => this.add(task));
+  }
 
-  next() {}
+  getNext() {
+    if (tasks.length === 0) {
+      return null;
+    }
+    return tasks.shift();
+  }
 
-  removeAll() {}
+  removeAll() {
+    tasks.length = 0;
+  }
 }
 
 export default TaskManager;
