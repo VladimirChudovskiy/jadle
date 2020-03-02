@@ -1,52 +1,53 @@
-let _instance = null;
-const _events = {};
+let instance = null;
+const events = {};
 
 class EventEmitter {
   constructor() {
-    if ( _instance === null) {
-      _instance = this;
+    if (instance === null) {
+      instance = this;
     }
 
-    return _instance;
+    return instance;
   }
 
   on(event, listener, name) {
-    if ( ! _events.hasOwnProperty(event)) {
-      _events[event] = [];
+    let listenerName = name;
+    if (!(event in events)) {
+      events[event] = [];
     }
-    const index = _events[event].findIndex((item) => item.name === name);
+    const index = events[event].findIndex((item) => item.name === listenerName);
     if (index === -1) {
-      if (typeof name === 'undefined') {
-        name = null;
+      if (typeof listenerName === 'undefined') {
+        listenerName = null;
       }
-      _events[event].push({
-        name,
-        listener
+      events[event].push({
+        name: listenerName,
+        listener,
       });
       return;
     }
-    _events[event][index].listener = listener;
+    events[event][index].listener = listener;
   }
 
   emit(event, data) {
-    if ( ! event in _events) {
+    if (!(event in events)) {
       return;
     }
-    _events[event].forEach((item) => {
-      item.listener(data)
+    events[event].forEach((item) => {
+      item.listener(data);
     });
   }
 
   remove(event, name) {
-    if ( ! event in _events) {
+    if (!(event in events)) {
       return;
     }
-    const index = _events[event].findIndex((item) => item.name === name);
+    const index = events[event].findIndex((item) => item.name === name);
     if (index !== -1) {
-      _events[event].splice(index, 1);
+      events[event].splice(index, 1);
     }
   }
-};
+}
 
 
 export default EventEmitter;

@@ -18,12 +18,11 @@ class TaskManager {
     tasks.push(task);
   }
 
-  addMultiple(tasks) {}
+  // addMultiple(tasks) {}
 
   next() {}
 
   removeAll() {}
-    
-};
+}
 
 export default TaskManager;

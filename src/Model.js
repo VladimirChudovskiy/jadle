@@ -15,7 +15,7 @@ class Model {
     const prevValue = data[name];
     data[name] = value;
     if ('modelUpdated' in events) {
-      events['modelUpdated']('modelUpdated', {
+      events.modelUpdated('modelUpdated', {
         prop: name,
         prev: prevValue,
         current: value,
@@ -34,7 +34,7 @@ class Model {
   removeListener(name) {
     delete events[name];
   }
-};
+}
 
 
 export default Model;

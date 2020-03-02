@@ -7,49 +7,50 @@ const defaultTask = {
   keep: false,
 };
 
-const parse = (task) => {
-  if (typeof task === 'string') {
-    return parseStringTask(task);
-  } else {
-    return Object.assign({}, defaultTask, task);
-  }
-};
-
 const parseStringTask = (task) => {
-  const parsedTask = Object.assign({}, defaultTask);
+  let currentTask = task;
+  const parsedTask = { ...defaultTask };
 
   if (task.includes('[await]')) {
     parsedTask.await = true;
-    task = task.replace('[await]', '');
+    currentTask = currentTask.replace('[await]', '');
   }
-  if (task.includes('[keep]')) {
+  if (currentTask.includes('[keep]')) {
     parsedTask.keep = true;
-    task = task.replace('[keep]', '');
+    currentTask = currentTask.replace('[keep]', '');
   }
-  if (task.includes('[delayBefore')) {
-    const beforeStart = task.indexOf('[delayBefore');
-    const beforeEnd = task.indexOf(']', beforeStart) + 1;
-    const beforeStr = task.slice(beforeStart, beforeEnd);
+  if (currentTask.includes('[delayBefore')) {
+    const beforeStart = currentTask.indexOf('[delayBefore');
+    const beforeEnd = currentTask.indexOf(']', beforeStart) + 1;
+    const beforeStr = currentTask.slice(beforeStart, beforeEnd);
     const beforeParts = beforeStr.split(':');
-    task = task.replace(beforeStr, '');
-    parsedTask.delayBefore = parseInt(beforeParts[1]);
+    currentTask = currentTask.replace(beforeStr, '');
+    parsedTask.delayBefore = parseInt(beforeParts[1], 10);
   }
-  if (task.includes('[delayAfter')) {
-    const afterStart = task.indexOf('[delayAfter');
-    const afterEnd = task.indexOf(']', afterStart) + 1;
-    const afterStr = task.slice(afterStart, afterEnd);
+  if (currentTask.includes('[delayAfter')) {
+    const afterStart = currentTask.indexOf('[delayAfter');
+    const afterEnd = currentTask.indexOf(']', afterStart) + 1;
+    const afterStr = currentTask.slice(afterStart, afterEnd);
     const afterParts = afterStr.split(':');
-    task = task.replace(afterStr, '');
-    parsedTask.delayAfter = parseInt(afterParts[1]);
+    currentTask = currentTask.replace(afterStr, '');
+    parsedTask.delayAfter = parseInt(afterParts[1], 10);
   }
-  const taskParts = task.split(':');
-  parsedTask.action = taskParts[0];
+  const taskParts = currentTask.split(':');
+  [parsedTask.action] = taskParts;
   if (taskParts.length > 1) {
     parsedTask.params = taskParts[1].split(',');
   }
   return parsedTask;
 };
 
+const parse = (task) => {
+  if (typeof task === 'string') {
+    return parseStringTask(task);
+  }
+  return { ...defaultTask, ...task };
+};
+
 export {
   parse,
+  parseStringTask,
 };
