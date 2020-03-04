@@ -1,23 +1,16 @@
 import { parse } from './TaskParser';
 
-let instance = null;
-const tasks = [];
-
 class TaskManager {
   constructor() {
-    if (instance === null) {
-      instance = this;
-    }
-
-    return instance;
+    this.tasks = [];
   }
 
   get length() {
-    return tasks.length;
+    return this.tasks.length;
   }
 
   add(task) {
-    tasks.push(parse(task));
+    this.tasks.push(parse(task));
   }
 
   addMultiple(items) {
@@ -25,14 +18,14 @@ class TaskManager {
   }
 
   getNext() {
-    if (tasks.length === 0) {
+    if (this.tasks.length === 0) {
       return null;
     }
-    return tasks.shift();
+    return this.tasks.shift();
   }
 
   removeAll() {
-    tasks.length = 0;
+    this.tasks.length = 0;
   }
 }
 

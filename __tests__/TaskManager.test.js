@@ -1,10 +1,10 @@
 import TaskManager from '../src/TaskManager';
 
-test('check TaskManager is singltone', () => {
+test('check TaskManager shouldnt be singletone', () => {
   const tm = new TaskManager();
   const tm2 = new TaskManager();
 
-  expect(tm === tm2).toBeTruthy();
+  expect(tm === tm2).not.toBeTruthy();
 });
 
 test('add task', () => {
