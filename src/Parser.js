@@ -1,21 +1,30 @@
-// let instance = null;
-//
-// class Parser {
-//   constructor() {
-//     if (instance === null) {
-//       this.state = null;
-//       this.conditions = [];
-//       this.script = '';
-//       instance = this;
-//     }
-//
-//     return instance;
-//   }
-//   checkConditions () {}
-//   handleState () {}
-//   changeState () {}
-//   updateConditions () {}
-//   destroy () {}
-// }
-//
-// export default Parser;
+class Parser {
+  constructor() {
+    this.model = null;
+    this.script = null;
+  }
+
+  setScript(script) {
+    if (typeof script === 'string') {
+      this.script = script;
+    } else {
+      this.script = JSON.stringify(script);
+    }
+  }
+
+  setModel(model) {
+    this.model = model;
+  }
+
+  checkConditions() {}
+
+  handleState() {}
+
+  changeState() {}
+
+  updateConditions() {}
+
+  destroy() {}
+}
+
+export default Parser;
